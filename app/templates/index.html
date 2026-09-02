@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhishGuard AI</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div>
+    <div class="brand">🛡️ PhishGuard <span>AI</span></div>
+    <div class="subtitle">Real-Time Phishing Detection & Explainable Risk Analysis</div>
+  </div>
+  <div class="live"><i></i> LIVE MONITOR</div>
+</header>
+
+<section class="stats">
+  <div class="stat"><small>TOTAL SCANS</small><strong id="total">0</strong></div>
+  <div class="stat"><small>LEGITIMATE</small><strong id="safe">0</strong></div>
+  <div class="stat"><small>SUSPICIOUS</small><strong id="suspicious">0</strong></div>
+  <div class="stat danger"><small>PHISHING</small><strong id="phishing">0</strong></div>
+</section>
+
+<main class="grid">
+<section class="card">
+  <div class="card-title">
+    <div><h2>Analyze Message</h2><p>Instant AI + security analysis.</p></div>
+    <div><button class="ghost" onclick="loadDemo()">Load Demo</button> <button class="ghost" onclick="clearHistory()">🗑 Clear History</button></div>
+  </div>
+  <label>Subject</label>
+  <input id="subject" placeholder="Example: Urgent account verification required">
+  <label>Message</label>
+  <textarea id="message" placeholder="Paste an email or message here..."></textarea>
+  <button id="scanBtn" class="scan" onclick="scanMessage()">🔍 Scan for Phishing</button>
+  <div id="status" class="status"></div>
+</section>
+
+<section class="card">
+  <div class="card-title">
+    <div><h2>Analysis Result</h2><p>ML + explainable security indicators.</p></div>
+    <span id="badge" class="badge neutral">WAITING</span>
+  </div>
+  <div class="score-wrap"><div class="score" id="score">—</div><small>RISK SCORE</small></div>
+  <div class="bar"><div id="barFill"></div></div>
+  <div class="confidence">AI phishing probability: <b id="mlprob">—</b>%</div>
+  <h3>Why this result?</h3>
+  <ul id="reasons"><li>Run a scan to see explainable indicators.</li></ul>
+  <div class="recommend" id="recommend">Security recommendations will appear here.</div>
+  <div class="ai-box" id="aiExplanation"><h3>🤖 AI Explanation in Simple Words</h3><p>After scanning, PhishGuard will explain what could happen if you follow the email's request.</p></div>
+  <div class="domain-box" id="domainInfo"><h3>🌐 Domain Age Check</h3><p>No domain has been analyzed yet.</p></div>
+</section>
+
+<section class="card email-card">
+  <div class="card-title"><div><h2>📨 Real-Time Email Test Lab</h2><p>Paste a real email or test case. PhishGuard analyzes it locally and never clicks its links.</p></div><span class="badge safe">LOCAL ANALYSIS</span></div>
+  <div class="test-grid">
+    <div><label>Sender (optional)</label><input id="sender" placeholder="security@example.com"></div>
+    <div><label>Test Case</label><select id="testCase" onchange="loadTestCase()"><option value="">Choose a test case...</option><option value="phishing">Phishing — urgent account verification</option><option value="bank">Phishing — bank/payment request</option><option value="invoice">Suspicious — invoice/payment</option><option value="legitimate">Legitimate — normal notification</option></select></div>
+  </div>
+  <div class="email-actions"><button class="ghost" onclick="loadRealisticPhishing()">⚠️ Phishing Test</button><button class="ghost" onclick="loadLegitimate()">✅ Legitimate Test</button><button class="ghost" onclick="clearTest()">Clear</button></div>
+  <label>Safety mode</label><div class="safety-note">🚫 <b>Never click email links.</b> URLs are extracted as text only. The application does not navigate to or request any detected URL.</div>
+</section>
+
+<section class="card history">
+  <div class="card-title"><div><h2>Live Scan History</h2><p>Updates automatically through WebSocket.</p></div></div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Time</th><th>Subject</th><th>Result</th><th>Risk</th></tr></thead>
+    <tbody id="history"></tbody>
+  </table>
+  </div>
+</section>
+</main>
+<footer>PhishGuard AI • Defensive security prototype • Detection is probabilistic</footer>
+</div>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
